@@ -186,22 +186,13 @@ $openssl req -x509 -newkey rsa:4096 -keyout key.key -out certificate.crt -days 3
 Install django-sslserver
 
 ```
-$pip3 install django-sslserver
+$pip3 install -r ssl-requirements.txt
 ```
 
-Update INSTALLED_APPS with sslserver by editing the file floodrelief/settings.py (diff below)
-
-```diff
- INSTALLED_APPS = [
-+    'sslserver',
-     'mainapp.apps.MainappConfig',
-     'django.contrib.admin',
-```
-#### Note: Make sure that this change is removed before pushing your changes back to git
 Run the server
 
 ```
-python3 manage.py runsslserver 10.0.0.131:8002  --certificate /path/to/certificate.crt --key /path/to/key.key
+python3 manage.py runsslserver 127.0.0.1:8002  --certificate /path/to/certificate.crt --key /path/to/key.key --settings=floodrelief.ssl-settings
 ```
 In the above example the server is being run on a local IP address on port 8002 to enable HTTPS access from mobile/laptop/desktop for testing.
 
